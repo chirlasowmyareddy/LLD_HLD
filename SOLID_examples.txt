@@ -1,0 +1,198 @@
+S— Single Responsibility Principle (SRP)
+    A class should have only ONE reason to change
+
+    class UserService {
+        void addUser(String name) {
+            System.out.println("User added: " + name);
+        }
+
+        void saveToDatabase(String name) {
+            System.out.println("Saving user to DB");
+        }
+
+        void sendEmail(String name) {
+            System.out.println("Sending email to " + name);
+        }
+    }
+    Problem
+    One class handling business logic + DB + email
+    Multiple reasons to change
+
+    class UserService {
+        void addUser(String name) {
+            System.out.println("User added: " + name);
+        }
+    }
+
+    class UserRepository {
+        void save(String name) {
+            System.out.println("Saving user to DB");
+        }
+    }
+
+    class EmailService {
+        void send(String name) {
+            System.out.println("Sending email to " + name);
+        }
+    }
+    Benefit
+    Each class has one responsibility
+    Easier to maintain and test
+
+O — Open/Closed Principle (OCP)
+
+    Open for extension, closed for modification
+
+    class DiscountService {
+        double calculateDiscount(String type, double amount) {
+            if (type.equals("NEW")) {
+                return amount * 0.1;
+            } else if (type.equals("PREMIUM")) {
+                return amount * 0.2;
+            }
+            return 0;
+        }
+    }
+    Problem
+    Adding new discount → modify existing code
+
+    interface DiscountStrategy {
+        double calculate(double amount);
+    }
+
+    class NewUserDiscount implements DiscountStrategy {
+        public double calculate(double amount) {
+            return amount * 0.1;
+        }
+    }
+
+    class PremiumDiscount implements DiscountStrategy {
+        public double calculate(double amount) {
+            return amount * 0.2;
+        }
+    }
+    Benefit
+    Add new discount without changing existing code
+    Easy to extend
+
+L — Liskov Substitution Principle (LSP)
+
+    Subclasses should be replaceable by parent class
+    class Bird {
+        void fly() {
+            System.out.println("Flying");
+        }
+    }
+
+    class Ostrich extends Bird {
+        void fly() {
+            throw new UnsupportedOperationException();
+        }
+    }
+    Problem
+    Ostrich cannot fly
+    Breaks parent contract
+
+    interface Bird {}
+
+    interface FlyingBird extends Bird {
+        void fly();
+    }
+
+    class Sparrow implements FlyingBird {
+        public void fly() {
+            System.out.println("Flying");
+        }
+    }
+
+    class Ostrich implements Bird {}
+
+    Benefit
+    No unexpected behavior
+    Substitution works correctly
+
+I — Interface Segregation Principle (ISP)
+    Clients should not depend on methods they don’t use
+    Interfaces should be in such a way that client should not implement unnecessary functions they do not need
+
+    interface Worker {
+        void work();
+        void eat();
+    }
+
+    class RobotWorker implements Worker {
+        public void work() {}
+        public void eat() {
+            // Not needed
+        }
+    }
+
+    Problem
+    Robot forced to implement eat()
+
+    interface Workable {
+        void work();
+    }
+
+    interface Eatable {
+        void eat();
+    }
+
+    class HumanWorker implements Workable, Eatable {
+        public void work() {}
+        public void eat() {}
+    }
+
+    class RobotWorker implements Workable {
+        public void work() {}
+    }
+
+    Benefit
+    Clean interfaces
+    No unnecessary methods
+
+D — Dependency Inversion Principle (DIP)
+
+    Depend on abstractions/interfaces, not concrete classes
+    class MySQLDatabase {
+        void connect() {
+            System.out.println("Connected to MySQL");
+        }
+    }
+
+    class UserService {
+        MySQLDatabase db = new MySQLDatabase();
+
+        void saveUser() {
+            db.connect();
+        }
+    }
+
+    Problem
+    Tight coupling
+    Hard to change DB
+
+    interface Database {
+        void connect();
+    }
+
+    class MySQLDatabase implements Database {
+        public void connect() {
+            System.out.println("Connected to MySQL");
+        }
+    }
+
+    class UserService {
+        private Database database;
+
+        UserService(Database database) {
+            this.database = database;
+        }
+
+        void saveUser() {
+            database.connect();
+        }
+    }
+    Benefit
+    Loose coupling
+    Easy to swap implementations

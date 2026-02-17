@@ -1,0 +1,37 @@
+-Apache kafka is a distributed streaming platform.
+-Allows application to send,store, and process data in real time.
+-Apache kafka is an open source distributed event streaming platform used by thousands of companies for high-performance
+data pipelines,streaming analytics,data integration,and missing-critical applications
+
+Benifits Of Using kafka
+-Scalability:handle large amounts of data
+-Fault Tolerance:replication of data
+-High Throughput:Capable of processing millions of messages per second
+-Durability:Reliable storage of messages
+
+Key Components of kafka
+    Topics- a kafka topic is like a "channel" or "category" where messages(data) are published.Think of it as a folder 
+        that holds all the messages belonging to a specific stream of data.
+            -when you send a message to kafka,you choose which topic to send to.
+            -consumers can subscribe to that topic to receive the messages
+    Producers-An application or process that sends events to kafka topics.producers write data to kafka
+    Consumers-An application or process that reads events from kafka topics
+        consumers subscribe to topics and process the data
+    Brokers-when you run kafka,you start one or more "broker" processes.It is basically the server(or node)in a kafka cluster
+        -stores messages
+        -Handle Read/write requests
+    Partitions-a Partition is a sub section of a kafka topic.Topics can have multiple partitions so data can be spread out
+        across brokers
+        -each Partition maintains a sequential order of messages,allowing parallel read and write for higher performance.
+    Zookeeper/KRAFT
+    
+Some other key words which are used in Kafka
+    Kafka Offset-It is a sequential number assigned to each message within a Partition.Think of it like page numbers in a
+        book.
+        Offsets are unique per Partition,helps in tracking
+        -the kafka broker assigns the offset not the producers
+        -maintains order(per partition):messages always read in order within a partition
+        -tracks consumer progress-consumers store their last read offset to resume processing
+        -supports message replay:consumers can rewind or seek to reprocess older messages
+        -stored in kafka(__consumer__offsets):kafka tracks offsets internally,unless configured otherwise.
+        Retention affects Offsets:If a message exceeds kafka's retention period,it may no longer exist.

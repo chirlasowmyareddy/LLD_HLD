@@ -1,6 +1,6 @@
-package LLD_HLD.DesignPatterns.Behavioral.StrategyPattern;
+package LLD_HLD.LowLevelDesign.DesignPatterns.Behavioral.StrategyPattern;
 
-import LLD_HLD.DesignPatterns.Behavioral.StrategyPattern.Strategy.DriveStrategy;
+import LLD_HLD.LowLevelDesign.DesignPatterns.Behavioral.StrategyPattern.Strategy.DriveStrategy;
 
 public class Vehicle {
 

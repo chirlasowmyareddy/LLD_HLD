@@ -1,4 +1,4 @@
-package LLD_HLD.DesignPatterns.Behavioral.StrategyPattern.Strategy;
+package LLD_HLD.LowLevelDesign.DesignPatterns.Behavioral.StrategyPattern.Strategy;
 
 public class SportsDriveStrategy implements DriveStrategy{
     @Override

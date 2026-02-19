@@ -1,4 +1,4 @@
-package LLD_HLD.DesignPatterns.Behavioral.StrategyPattern;
+package LLD_HLD.LowLevelDesign.DesignPatterns.Behavioral.StrategyPattern;
 
 public class Main {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package LLD_HLD.LowLevelDesign.DesignPatterns.Structural.FactoryPattern;
+package LLD_HLD.LowLevelDesign.DesignPatterns.Creational.FactoryPattern;
 
 public class ShapeFactory {
 

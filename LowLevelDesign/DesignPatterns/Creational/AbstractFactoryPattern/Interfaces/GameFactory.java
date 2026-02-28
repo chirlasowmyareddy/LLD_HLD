@@ -1,4 +1,4 @@
-package LLD_HLD.LowLevelDesign.DesignPatterns.Structural.AbstractFactoryPattern.Interfaces;
+package LLD_HLD.LowLevelDesign.DesignPatterns.Creational.AbstractFactoryPattern.Interfaces;
 
 //This factory ensures all products belong to the same family.
 public interface GameFactory {

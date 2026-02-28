@@ -1,6 +1,6 @@
-package LLD_HLD.LowLevelDesign.DesignPatterns.Structural.AbstractFactoryPattern;
+package LLD_HLD.LowLevelDesign.DesignPatterns.Creational.AbstractFactoryPattern;
 
-import LLD_HLD.LowLevelDesign.DesignPatterns.Structural.AbstractFactoryPattern.Interfaces.GameFactory;
+import LLD_HLD.LowLevelDesign.DesignPatterns.Creational.AbstractFactoryPattern.Interfaces.GameFactory;
 
 public class Main {
     public static void main(String[] args){

@@ -17,5 +17,6 @@ public abstract class Logger {
         }
     }
 
+    
     protected abstract void write(String message);
 }

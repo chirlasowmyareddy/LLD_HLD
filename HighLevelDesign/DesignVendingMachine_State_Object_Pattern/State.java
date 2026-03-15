@@ -11,7 +11,7 @@ public abstract class State {
             //by default nothing happens here
         }
 
-        public void updateInventory(VendingMachine vendingMachine,Item item,int codeNumber){
+        public void updateInventory(VendingMachine vendingMachine,Item item,int codeNumber) throws Exception{
             //by default nothing happens here
         }
 
@@ -20,7 +20,7 @@ public abstract class State {
             return null;
         }
 
-        public Item dispenseProduct(VendingMachine vendingMachine,int codeNumber){
+        public Item dispenseProduct(VendingMachine vendingMachine,int codeNumber) throws Exception{
             //by default nothing happens here
             return null;
         }
@@ -30,7 +30,7 @@ public abstract class State {
             return 0;
         }
 
-        public void chooseProduct(VendingMachine vendingMachine,int codeNumber){
+        public void chooseProduct(VendingMachine vendingMachine,int codeNumber) throws Exception{
             //by default nothing happens here
         }
 

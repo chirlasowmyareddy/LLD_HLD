@@ -1,4 +1,4 @@
-package LLD_HLD.HighLevelDesign.DesignATMSystem;
+package LLD_HLD.HighLevelDesign.DesignATMSystemChainResponsibiltyPrinciple;
 
 public class FiveHundredDispenser extends ATMDispenser{
 

@@ -1,0 +1,41 @@
+Singleton ensures that only one object of a class is created and provides a global access point to it.
+
+Singleton ensures that only one object of a class is created and provides a global access point to it.
+
+How to implement (step by step)
+    We need 3 things:
+    1️⃣ Make constructor private
+    2️⃣ Create a static instance
+    3️⃣ Provide a public method to access it
+
+
+Lazy + Thread Safe
+class Singleton {
+
+    private static Singleton instance;
+
+    private Singleton() {
+        // private constructor
+    }
+
+    public static synchronized Singleton getInstance() {
+        if (instance == null) {
+            instance = new Singleton();
+        }
+        return instance;
+    }
+}
+
+
+public class Main {
+    public static void main(String[] args) {
+
+        Singleton s1 = Singleton.getInstance();
+        Singleton s2 = Singleton.getInstance();
+
+        System.out.println(s1 == s2); // true
+    }
+}
+
+Singleton pattern ensures only one instance of a class is created and provides a global access point. 
+It is commonly used in scenarios like logging, configuration, and database connections.

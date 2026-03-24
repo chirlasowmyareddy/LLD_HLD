@@ -1,0 +1,11 @@
+Facade Design Pattern is used when we have to hide the system complexity from the client
+
+We should not enforce client to use facade layer it is the client's choice
+
+Facade vs proxy
+    proxy is/can handle only one object example only only and cannot handle payment object 
+    where as facade can handle both the payment and order object as well
+
+Facade vs Adaptor
+    adaptor is used for compatilblty between client and services
+    where as facade is used to hide the system's complexity

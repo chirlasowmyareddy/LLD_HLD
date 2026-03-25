@@ -10,28 +10,42 @@ How to implement (step by step)
 
 
 Lazy + Thread Safe
-class Singleton {
+class SingletonDBConnection {
 
-    private static Singleton instance;
+    private static SingletonDBConnection instance;
 
-    private Singleton() {
+    private SingletonDBConnection() {
         // private constructor
     }
 
-    public static synchronized Singleton getInstance() {
+    public static synchronized SingletonDBConnection getInstance() {
         if (instance == null) {
             instance = new Singleton();
         }
         return instance;
+    }//this is very expensive
+
+    //so we use double Locking
+    public static SingletonDBConnection getInstance() {
+        if (instance == null) {
+            synchronized (SingletonDBConnection.class){
+                if(instance == null){
+                    instance = new SingletonDBConnection();
+                }
+            }
+        }
+        return instance;
     }
+
 }
+
 
 
 public class Main {
     public static void main(String[] args) {
 
-        Singleton s1 = Singleton.getInstance();
-        Singleton s2 = Singleton.getInstance();
+        SingletonDBConnection s1 = SingletonDBConnection.getInstance();
+        SingletonDBConnection s2 = SingletonDBConnection.getInstance();
 
         System.out.println(s1 == s2); // true
     }
@@ -39,3 +53,11 @@ public class Main {
 
 Singleton pattern ensures only one instance of a class is created and provides a global access point. 
 It is commonly used in scenarios like logging, configuration, and database connections.
+
+
+
+4 ways to achive this:
+    Eager
+    Lazy
+    Synchronized Method
+    Double Locking(this is used in the industry)

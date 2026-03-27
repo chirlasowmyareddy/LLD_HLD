@@ -1,0 +1,2 @@
+This pattern helps to provide control access to original object 
+client--->proxy--->resource

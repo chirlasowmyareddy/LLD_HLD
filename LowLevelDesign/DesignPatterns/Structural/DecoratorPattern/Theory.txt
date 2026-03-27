@@ -1,0 +1,1 @@
+This pattern helps to add more functionality to existing object,without changing its structure

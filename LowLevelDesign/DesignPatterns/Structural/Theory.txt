@@ -1,0 +1,11 @@
+It is a way to combine or arrange different classes and objects to form a complex or bigger structure to solve
+a particular requirement.
+
+
+Decorator
+Proxy pattern
+Composite pattern
+Adaptor pattern
+Bridge pattern
+Facade
+Flyweight

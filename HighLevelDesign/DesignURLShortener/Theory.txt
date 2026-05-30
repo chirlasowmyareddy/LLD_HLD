@@ -1,0 +1,198 @@
+Gather Requirements
+    Functional Requirements
+        - URL Shortening -Get unique URL
+        - URL Redirection
+        - Link analytics - (optional) - Be able to track the number of times each short url is accessed -(mainly used for caching purpose)
+
+
+    Non-Functional Requirements
+        - Minimize redirect latency
+        - 1B  reads per day =>10^9/10^5 = 10k RPS
+        - 1 - 5B total lifetime URL's
+
+    What we can ask
+        what is the volume of the url's that we want to handle- 100million/day
+        how short the url's should be?- as small as possible
+        what kind of characters do you need - alphaneumeric without symbols
+        can url's be updated/deleted-no(for simplicity)(used in database perspective)
+
+
+        301- permanent redirect
+        302- temporarily moved
+
+API Design / Database Design(can use sql)
+        POST /api/urls/shorten
+            Req: Long URL
+            Res: Short URL
+        GET /api/urls/{shortURL}
+            Res: Redirect
+
+        high level view
+            long url ->f(x) -> short url
+High Level Design
+Deep Dives
+
+
+
+generrally we can store the generated url's in a hash map and add if something new came but this is not possible in the distributed systems
+as hash map is an in memory so we need a database for this where we can have a id, short url,long url and service this all through the world to provide
+access for all the users
+
+approach-1
+we use hash+ collision resolution
+if the value(short url) is already present we append a predefined string to the long url and then continue the process of creating the unique short url and
+then save it to db otehr wise we simply store in the db and stop
+
+approach-2
+id based approach(base 62)
+typical flow -> long url->is long url in db ->return short url
+                                |
+                            generate new id -> create short url for id -> save id,short url,long url in db
+
+    no security
+    no collisions
+    url length is unpredictable
+
+
+
+high level flow
+Client
+  |
+  V
+URL Shortener Service
+  |
+Generate Short Code
+  |
+Store Mapping
+  |
+Return Short URL    
+
+Redirect 
+
+Client hits
+
+short.ly/abc123
+
+↓
+
+Service
+
+↓
+
+Lookup original URL
+
+↓
+
+302 Redirect
+
+
+Step 5: How To Generate Short Code
+
+This is where interviewers focus.
+
+Option 1: Random String
+
+Generate:
+
+aB3xP1
+
+Pros:
+
+Simple
+
+Cons:
+
+Collision possible
+
+Need retry logic.
+
+Option 2: Base62 Encoding (Preferred)
+
+Suppose DB ID is:
+
+1001
+
+Convert to Base62.
+
+Characters:
+
+0-9
+a-z
+A-Z
+
+Result:
+
+g7
+
+Short URL:
+
+short.ly/g7
+
+Pros:
+
+Unique
+No collisions
+
+This is usually the preferred answer.
+
+
+
+we can use redis for optimization
+
+
+Step 8: Handling Huge Scale
+
+If interviewer goes deeper:
+
+Database Sharding
+
+Partition by:
+
+short_code hash
+
+Example:
+
+Shard1
+Shard2
+Shard3
+
+Avoids single DB bottleneck.
+
+
+Why Base62?
+
+Answer:
+
+Base62 uses digits, lowercase letters, and uppercase letters, giving 62 possible characters per position. This creates compact URLs and supports a large number of unique combinations.
+
+Why Cache?
+
+Answer:
+
+Redirect operations are much more frequent than URL creation. Caching frequently accessed mappings significantly reduces database load and improves response time.
+
+Why 302 Redirect?
+
+Answer:
+
+302 indicates a temporary redirect. Depending on requirements, we can also use 301 for permanent redirection.
+
+
+
+
+
+Requirements
+↓
+APIs
+↓
+Database
+↓
+Short URL Generation
+↓
+Redirect Flow
+↓
+Caching
+↓
+Scaling
+↓
+Trade-offs
